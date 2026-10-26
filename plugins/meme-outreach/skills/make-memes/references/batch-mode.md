@@ -2,7 +2,7 @@
 
 ## Input
 
-A CSV (see `templates/prospects_template.csv`), a pasted list, or a spreadsheet export. Columns are matched loosely; only `name` and `company` are required:
+A CSV (see `${CLAUDE_PLUGIN_ROOT}/skills/make-memes/templates/prospects_template.csv`), a pasted list, or a spreadsheet export. Columns are matched loosely; only `name` and `company` are required:
 
 | Column | Meaning |
 | --- | --- |
@@ -38,9 +38,9 @@ Images to generate: 9
 
 ## Making the images
 
-- Generate **one clean photo per group** (no text; Template A in `image-prompt-recipe.md`), preferably with `scripts/openai_image.py` so the files are local.
+- Make **one image per group**, using a fresh prompt written from the group's scene and the generators in `image-routes.md` (Tella → Gamma → other image tool). Prefer Prompt A (no text) when the file can be downloaded, then add text with the script. Check credits first: if they won't cover every group, make the most valuable groups first and tell the user.
 - Look at each photo once before using it. Regenerate any that look cartoonish or off.
-- Add captions with `scripts/batch_captions.py`, driven by a plan CSV with one row per finished image:
+- Add captions with `python3 ${CLAUDE_PLUGIN_ROOT}/skills/make-memes/scripts/batch_captions.py plan.csv`, driven by a plan CSV with one row per finished image:
 
 ```
 base_image,output,caption,labels
@@ -49,11 +49,11 @@ work/group2.png,out/images/group2.png,"Google Ads, GA4 and the CRM when one cust
 ```
 
 - Only make a per-prospect variant (same photo, different caption) when the caption itself needs their detail — for example a seasonal date that differs. Keep names and company names out of images.
-- If no image route is available: still write every DM, and put the finished Template B prompt for each group in the CSV so the user can generate the images elsewhere.
+- If an image can't be made: still write every DM, and put the finished prompt for that group in the CSV so the user can make it elsewhere.
 
 ## Writing the DMs
 
-Every prospect gets their own two messages, following `dm-rules.md`. Message 1 must use something specific to them (their words, their company, a real signal from the row or quick research); never send the same message 1 to two people. The question can repeat across a group if it fits each person.
+Every prospect gets their own two messages, following `dm-rules.md`. When the CSV is written, check every row with `python3 ${CLAUDE_PLUGIN_ROOT}/skills/make-memes/scripts/check_dm.py --csv messages.csv --client "<client name>"` and rewrite any row that fails. Message 1 must use something specific to them (their words, their company, a real signal from the row or quick research); never send the same message 1 to two people. The question can repeat across a group if it fits each person.
 
 ## Output
 
