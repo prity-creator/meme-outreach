@@ -37,7 +37,7 @@ Why it fits Maria: three locations, likely three ways of doing the numbers
 
 5. **Image:** Tella was connected, so it used Tella's `generate_image` (landscape). The image came back as a link, so the caption was written by Tella (Template B) and checked for spelling.
 
-![Me doing the books after a 14-hour Saturday.](https://ucarecdn.com/e7b160ed-5cde-4761-8d92-089191e4fa9c/-/resize/1200x/-/format/jpeg/)
+![Me doing the books after a 14-hour Saturday.](meme-books-tella.jpg)
 
 6. **DM:** exactly two messages, no pitch.
 
