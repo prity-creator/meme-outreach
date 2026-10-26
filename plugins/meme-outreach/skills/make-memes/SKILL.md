@@ -1,6 +1,6 @@
 ---
 name: make-memes
-description: Create personalized, real-life-photo-style memes for sales outreach, plus the short casual DM to send with each one, built from the client's brief. Works for one prospect (paste the LinkedIn/email thread) or a whole list (a CSV of 10–100+ prospects), as a first message or as a follow-up to prospects who went quiet. Use this whenever someone says "make a meme for this prospect", "meme follow-up", "this is an Acme prospect, they ghosted", "send memes to this list", "creative follow-up", or pastes an outreach thread that got no reply — even if they don't say the word meme but want a creative way to restart a conversation.
+description: Create personalized memes for sales outreach (real-life-photo-style scenes or famous meme templates from the web), plus the short casual DM to send with each one, built from the client's brief. Works for one prospect (paste the LinkedIn/email thread) or a whole list (a CSV of 10–100+ prospects), as a first message or as a follow-up to prospects who went quiet. Use this whenever someone says "make a meme for this prospect", "meme follow-up", "this is an Acme prospect, they ghosted", "send memes to this list", "creative follow-up", or pastes an outreach thread that got no reply — even if they don't say the word meme but want a creative way to restart a conversation.
 ---
 
 # Make Memes for Outreach
@@ -12,7 +12,7 @@ Everything you need is in this skill's folder (its base directory, shown when th
 | File | What it's for |
 | --- | --- |
 | `references/brief-template.md` | The client brief format, and the questions to ask when there's no brief |
-| `references/meme-method.md` | How to go from a pain to a meme: the pain chain, meme rules, scene ideas |
+| `references/meme-method.md` | How to go from a pain to a meme: the pain chain, meme rules, scene ideas, famous templates |
 | `references/image-prompt-recipe.md` | The photo style, prompt templates, and how to use each image tool |
 | `references/dm-rules.md` | Exactly how to write the DM, for first messages and follow-ups |
 | `references/batch-mode.md` | How to run a list of prospects and what to hand back |
@@ -73,6 +73,8 @@ Use `references/image-prompt-recipe.md`. Use the first route that works:
 2. **Gamma MCP** (`generate_image`, if connected) — square photo, credits per image.
 3. **OpenAI script** (`scripts/openai_image.py`, if `OPENAI_API_KEY` is set) — saves the image file locally. Best for batches.
 
+**Famous template?** If the chosen concept uses a famous meme template (Drake, distracted boyfriend, etc.), skip image generation entirely: download the blank template and add the text with `scripts/add_caption.py`, as described in `references/meme-method.md` under "Famous meme templates". This costs nothing and the text is always spelled right.
+
 For batches, prefer the OpenAI script when it's available: files land on disk, so captions can be added exactly and nothing has to be downloaded.
 
 Find MCP tools with a tool search ("generate_image"). If a route errors with an out-of-credits or quota message, don't retry it; tell the user which limit was hit and move to the next route. If nothing is available, say so, and hand back the finished prompts (with the caption) so the user can paste them into any image tool such as ChatGPT. The DMs are still written.
@@ -95,8 +97,8 @@ Then, if the user is happy with a meme, offer once to add it to the client's mem
 
 ## Ground rules
 
-- Real-life photo look only: grainy phone snapshots of ordinary people in everyday places. No cartoons, 3D, illustrations or glossy AI style.
-- Original scenes only: no celebrities, no real people's likeness, no famous meme templates or stills, no brand logos in the image. Platform or tool names as caption or label text are fine.
+- Two styles: an original real-life photo scene (grainy phone snapshot, ordinary people, everyday places), or a famous meme template from the web. No cartoons, 3D, illustrations or glossy AI style.
+- Famous templates: use the real template image, downloaded from the web. Never use AI to generate a celebrity, a lookalike, or a fake version of a famous meme. No brand logos added to the image. Platform or tool names as caption or label text are fine.
 - Joke about the situation, never about the prospect, their company or their work.
 - Never put a prospect's name or company in the image unless the user asks; keep the personal part in the DM.
 - Numbers in captions are part of the joke ("day 74", "40 accounts"), never presented as real results.
