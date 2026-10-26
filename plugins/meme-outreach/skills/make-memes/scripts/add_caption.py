@@ -96,13 +96,21 @@ def main():
         size = int(min(w, h) * 0.055)
         font = load_font(size)
         stroke = max(2, size // 12)
-        tw = text_width(scratch, text, font, stroke)
-        box = scratch.textbbox((0, 0), text, font=font, stroke_width=stroke)
-        th = box[3] - box[1]
-        px = min(max(int(x * w - tw / 2), 4), w - tw - 4)
-        py = min(max(int(y * h - th / 2), 4), h - th - 4)
-        scratch.text((px - box[0], py - box[1]), text, font=font, fill="white",
-                     stroke_width=stroke, stroke_fill="black")
+        # Long labels wrap onto several lines, each centered (handy for template panels).
+        lines = wrap(scratch, text, font, w * 0.42)
+        line_h = scratch.textbbox((0, 0), "Ag", font=font, stroke_width=stroke)
+        line_h = line_h[3] - line_h[1]
+        gap = int(line_h * 0.2)
+        block_h = len(lines) * line_h + (len(lines) - 1) * gap
+        block_w = max(text_width(scratch, ln, font, stroke) for ln in lines)
+        top = min(max(int(y * h - block_h / 2), 4), max(4, h - block_h - 4))
+        center = min(max(x * w, block_w / 2 + 4), w - block_w / 2 - 4)
+        for ln in lines:
+            tw = text_width(scratch, ln, font, stroke)
+            box = scratch.textbbox((0, 0), ln, font=font, stroke_width=stroke)
+            scratch.text((int(center - tw / 2) - box[0], top - box[1]), ln, font=font, fill="white",
+                         stroke_width=stroke, stroke_fill="black")
+            top += line_h + gap
 
     # Footer: extend the canvas with a white bar and centered black caption.
     font, lines = fit_caption(scratch, args.caption, w)
