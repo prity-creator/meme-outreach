@@ -26,7 +26,7 @@ Nothing else: no proof points, no "compare notes", no call ask, no calendar link
 
 Ask it the way a friend in the industry would over coffee. It must not sound like a sales discovery question.
 
-- Under ~15 words.
+- Short: 18 words max.
 - Plain words. No jargon like "push", "strategy", "goals", "bandwidth", "priorities", "solutions", "currently".
 - Don't use their company name ("for Acme") — say "you guys" or "your team".
 - Ask about their world, never about our service. Nothing that hints at a pitch.
