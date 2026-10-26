@@ -1,0 +1,14 @@
+{
+  "name": "meme-outreach",
+  "description": "Personalized, real-photo-style memes for cold outreach and follow-ups",
+  "owner": {
+    "name": "prity-creator"
+  },
+  "plugins": [
+    {
+      "name": "meme-outreach",
+      "source": "./plugins/meme-outreach",
+      "description": "Turn a prospect thread (or a list of 100 prospects) into personalized memes plus short, casual DMs, built from your client brief"
+    }
+  ]
+}
