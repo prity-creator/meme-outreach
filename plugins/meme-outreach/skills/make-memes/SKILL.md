@@ -1,105 +1,126 @@
 ---
 name: make-memes
-description: Create personalized memes for sales outreach (real-life-photo-style scenes or famous meme templates from the web), plus the short casual DM to send with each one, built from the client's brief. Works for one prospect (paste the LinkedIn/email thread) or a whole list (a CSV of 10–100+ prospects), as a first message or as a follow-up to prospects who went quiet. Use this whenever someone says "make a meme for this prospect", "meme follow-up", "this is an Acme prospect, they ghosted", "send memes to this list", "creative follow-up", or pastes an outreach thread that got no reply — even if they don't say the word meme but want a creative way to restart a conversation.
+description: Step 2 of meme outreach. Makes a personalized, original meme (a real-looking photo scene of people or animals, written as a fresh image prompt from the client's insight map) plus a short, casual two-line DM for a sales prospect, using the client's brief and meme map. Works for one prospect (paste the LinkedIn or email thread) or a list of 10 to 100+ prospects, as a first message or as a follow-up to people who went quiet. Use whenever someone says "make a meme for this prospect", "meme follow-up", "this is an Acme prospect, they ghosted", "send memes to this list", "creative follow-up", or pastes an outreach thread that got no reply.
 ---
 
-# Make Memes for Outreach
+# Make Memes (Part 2 of Meme Outreach)
 
-You turn prospects into conversations with one sharp meme each. The meme is about a pain the prospect will recognize ("ha, that's us"), never about them ignoring us. Each meme goes out with a two-line DM that sounds like a friend in the industry, not a salesperson.
+You turn a quiet prospect into a conversation with one sharp meme and two short messages. The meme is about a pain the prospect will recognize ("ha, that's us"), never about them ignoring us. The DM sounds like a friend in the industry, not a salesperson.
 
-Everything you need is in this skill's folder (its base directory, shown when the skill loads):
+Files (paths inside this plugin):
+- `${CLAUDE_PLUGIN_ROOT}/skills/make-memes/references/meme-method.md` — pain chain, what makes a meme land, good vs. bad examples, what good looks like
+- `${CLAUDE_PLUGIN_ROOT}/skills/make-memes/references/dm-rules.md` — exactly how to write the two messages
+- `${CLAUDE_PLUGIN_ROOT}/skills/make-memes/references/image-routes.md` — how to write the image prompt, and how to use Tella, Gamma or another image tool
+- `${CLAUDE_PLUGIN_ROOT}/skills/make-memes/references/batch-mode.md` — running a list
+- `${CLAUDE_PLUGIN_ROOT}/skills/make-memes/scripts/` — `find_client.py`, `check_dm.py`, `add_caption.py`, `batch_captions.py`
 
-| File | What it's for |
-| --- | --- |
-| `references/brief-template.md` | The client brief format, and the questions to ask when there's no brief |
-| `references/meme-method.md` | How to go from a pain to a meme: the pain chain, meme rules, scene ideas, famous templates |
-| `references/image-prompt-recipe.md` | The photo style, prompt templates, and how to use each image tool |
-| `references/dm-rules.md` | Exactly how to write the DM, for first messages and follow-ups |
-| `references/batch-mode.md` | How to run a list of prospects and what to hand back |
-| `examples/northwind-bookkeeping.md` | A complete made-up client brief with a meme bank, to copy the format from |
-| `scripts/add_caption.py` | Adds the white footer caption and name labels to a photo, with perfect spelling |
-| `scripts/openai_image.py` | Makes the photo with the OpenAI image API (needs the user's `OPENAI_API_KEY`) |
-| `scripts/batch_captions.py` | Runs `add_caption.py` over a whole plan CSV |
-| `templates/prospects_template.csv` | The column layout for batch input |
-
-Read `meme-method.md` and `dm-rules.md` every time. Read the others when you reach the step that needs them.
+Read `meme-method.md` and `dm-rules.md` before writing anything. Read the others when you reach their step.
 
 ## Step 1: Work out the job
 
-From the user's message, pin down four things. Only ask about what you can't tell:
+From the user's message, pin down:
+1. **Client** — whose prospect is this ("an Acme prospect")? If not said and not obvious, ask.
+2. **Mode** — single (one thread or person) or batch (a CSV, a list, "these 100 people").
+3. **Message type** — first message (nothing sent yet) or follow-up (we wrote before, they went quiet). A thread with our earlier messages means follow-up. In batch mode ask if it isn't stated.
+4. **Prospect** — the thread and whatever is known: name, title, company, website, LinkedIn.
 
-1. **Client:** whose prospect is this? ("This is an Acme prospect", "for Globex".) If they don't say and it isn't obvious from the thread, ask.
-2. **Mode:** **single** (one thread or one person) or **batch** (a CSV, a pasted list, or "these 100 people").
-3. **Message type:** **first message** (cold, nothing sent yet) or **follow-up** (we've written before and they went quiet). A thread with our earlier messages means follow-up. For batch, ask if it isn't stated — it changes every DM.
-4. **Prospect info:** the thread and/or name, title, company, website or LinkedIn URL.
+Only ask about what you can't tell. Ask everything missing in one message.
 
-## Step 2: Find the client brief
+## Step 2: Load the client (never skip)
 
-The brief tells you what the client sells, who buys, their pains, real proof points and the sender's voice. Look for it in this order and stop at the first hit:
+Run:
 
-1. **Pasted in this conversation.** Use it.
-2. **Saved briefs:** `~/.claude/meme-outreach/clients/` and, in the current project, `.claude/meme-outreach/clients/` and `clients/`. Match the client name loosely (Acme Co → `acme.md`, `acme-co.md`, `acme-brief.md`).
-3. **Inside other installed skills.** Many people already keep a client brief in a reply or DM skill. Search for the client name in markdown files under `~/.claude/skills/`, `.claude/skills/` and `~/.claude/plugins/` (for example `grep -ril "acme" --include=*.md ~/.claude/skills .claude/skills ~/.claude/plugins 2>/dev/null`). Prefer files that look like a brief (a `clients/` folder, "brief" in the name, sections on offer/ICP/case studies). Read it; don't edit it. Offer once to save a copy in `~/.claude/meme-outreach/clients/` so the next lookup is instant.
-4. **Not found.** Say so in one line, then offer two options: paste a brief (or a website/one-pager to build from), or answer the short question list in `references/brief-template.md`. Build the brief from the answers in the template format, show it, and save it to `~/.claude/meme-outreach/clients/<client-slug>.md` once the user confirms.
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/make-memes/scripts/find_client.py "<client name>"
+```
 
-Never invent client facts, case studies, results or quotes. If the brief has no proof points, the DM just doesn't use any.
+- **CLIENT-SKILL found** (a `<client>-memes` folder): read its `brief.md` and `meme-bank.md` in full. Continue.
+- **Only BRIEF-FILE / MENTION results** (for example a brief inside a DM-reply skill): tell the user what you found, then ask: set this client up properly first (recommended: run the `client-setup` skill on that file, which takes a few minutes and makes every future meme better), or use the file as-is just this once. If they choose as-is, read the file and work from it.
+- **Nothing found:** ask where the client information is (use AskUserQuestion when available):
+  1. In a folder (give the path)
+  2. In .md or text files (give the paths or attach them)
+  3. In a skill or plugin you already have (give its name)
+  4. Nowhere yet
+  
+  Then run the `client-setup` skill with that answer before making any memes. Don't make memes from guesses about the client.
 
-## Step 3: Read the prospect and decide if a meme fits
+From the brief, note: buyer types, pains (buyer's words), sender and voice, proof points, next step after a reply, off-limits.
 
-For each prospect, note for yourself: who they are, what kind of buyer they are (use the brief's buyer types), what was said so far (their own words matter most), where it stalled, and how many times we've followed up.
+## Step 3: Read the prospect, decide if a meme fits
 
-**Don't make a meme** — say why in one line and suggest the alternative — when:
-- They said "not interested", asked us to stop, or sounded annoyed.
-- They're actively talking or asked a real question. Answer them instead.
-- The context is sensitive (layoffs, a death, the company closing, a public crisis).
-- A meme was already sent in this thread and got no reply. Suggest one plain final note instead.
-- They're clearly not a fit per the brief's disqualifiers.
+For each prospect note: buyer type, what they said (their own words matter most), where it stalled, how many follow-ups already.
 
-A soft "maybe later" / "we're good for now" from 3+ weeks ago is fine for one meme, and the joke should match what they said.
+**No meme** — say why in one line and suggest the alternative — when:
+- they said not interested, asked to stop, or sounded annoyed
+- they're mid-conversation or asked a real question (answer them instead)
+- the context is sensitive (layoffs, a death, the company closing)
+- a meme was already sent in this thread with no reply (suggest one plain final note)
+- they fail the brief's qualified-lead rules
+
+A soft "maybe later" from 3+ weeks ago is fine for one meme, matched to what they said.
 
 ## Step 4: Pick the pain and the meme
 
-Follow `references/meme-method.md`. Pick the pain in this order: something they said in the thread → a real signal from light research (website, job posts, news) → the closest pain in the brief's meme bank or pain list for their buyer type.
+Pick the pain in this order:
+1. Something **they said** in the thread
+2. A real signal from 1–2 minutes of research (their website, an open job post, locations, a recent post, the season)
+3. The closest row in the client's `meme-bank.md` for their buyer type (★ rows first for quiet prospects)
 
-**Single mode:** show **2 meme concepts** in the format from `meme-method.md`, recommend one, and build it unless the user picks the other.
+**Single mode:** show **2 concepts** in the format from `meme-method.md`, each tied to this prospect in one line, recommend one, and build the recommended one straight away unless the user already asked to choose first. Run the concept through the "Does it land?" checklist in `meme-method.md`; if it fails, fix it before building.
 
-**Batch mode:** follow `references/batch-mode.md` — group prospects by pain, show the plan, and get a go-ahead before generating any images.
+Then **write the image prompt yourself** from the concept, using the prompt recipe in `image-routes.md`: the scene from the meme map row, adapted to this prospect (their industry, season, setting), with real-looking people or animals, one clear action and emotion, lighting, and the labels and caption. Every meme is a new, original scene; never a famous meme template, celebrity or lookalike.
+
+**Batch mode:** follow `batch-mode.md` (group by pain, show the plan, get a go-ahead before making images).
 
 ## Step 5: Make the image
 
-Use `references/image-prompt-recipe.md`. Use the first route that works:
+Follow `image-routes.md`. Claude writes the prompt; an image generator renders it. Every meme must be a **real-looking photo of people or animals**. Never draw, illustrate or render a meme yourself — a drawn picture is worse than no picture.
 
-1. **Tella MCP** (`generate_image`, if connected) — landscape 16:9, limited weekly generations.
-2. **Gamma MCP** (`generate_image`, if connected) — square photo, credits per image.
-3. **OpenAI script** (`scripts/openai_image.py`, if `OPENAI_API_KEY` is set) — saves the image file locally. Best for batches.
+Use the first image generator that works:
 
-**Famous template?** If the chosen concept uses a famous meme template (Drake, distracted boyfriend, etc.), skip image generation entirely: download the blank template and add the text with `scripts/add_caption.py`, as described in `references/meme-method.md` under "Famous meme templates". This costs nothing and the text is always spelled right.
+1. **Tella** — an MCP tool whose name contains `Tella` and `generate_image`
+2. **Gamma** — an MCP tool whose name contains `Gamma` and `generate_image`
+3. **Any other connected image generator** (any tool that turns a text prompt into an image)
 
-For batches, prefer the OpenAI script when it's available: files land on disk, so captions can be added exactly and nothing has to be downloaded.
+Find them with a tool search (`generate_image`, `image`). If a tool reports no credits or no quota, don't retry it — say which limit was hit in one line and try the next.
 
-Find MCP tools with a tool search ("generate_image"). If a route errors with an out-of-credits or quota message, don't retry it; tell the user which limit was hit and move to the next route. If nothing is available, say so, and hand back the finished prompts (with the caption) so the user can paste them into any image tool such as ChatGPT. The DMs are still written.
+**If no generator can make it:** say so in one line, save the finished prompt (Prompt B, with labels and caption written in) to `prompt.txt`, and hand it over ready to paste into any image tool (ChatGPT, Gemini, Ideogram, Midjourney). The DM is still delivered. Don't substitute a drawn image or a famous template.
 
-**Text spelling:** image models often garble words. When you have the image file locally, generate the photo with **no text** and add the caption and labels with `scripts/add_caption.py` — the spelling is then exact. When you only have a URL you can't download, put the text in the prompt with "spelled exactly" and tell the user to check it before sending.
+**Text spelling:** when you have the image file locally, generate the photo with **no text** and add caption and labels with `add_caption.py` — the spelling is then exact. If you only have a URL you can't download, put the text in the prompt with "spelled exactly" and tell the user to check it.
 
-After making an image you can see (a local file), look at it before handing it over. If it looks cartoonish, has extra text, or a label covers a face, fix it or regenerate.
+**Look at every image you have locally** before handing it over. Regenerate or fix it if it isn't a convincing photo of people or animals, has stray or misspelled text, a label covers a face, or the joke doesn't read in one second.
 
 ## Step 6: Write the DM
 
-Follow `references/dm-rules.md` exactly: the meme first, then **exactly two short messages** — one line tying the meme to them, one casual question — with no pitch, no proof points, no call ask and no links. The compare-notes offer and proof points come later, after they reply.
+Follow `dm-rules.md`: meme first, then **exactly two messages** — one light tie-in line, one casual question. No pitch, no proof points, no call ask, no links. Use the brief's sender voice.
 
-## Step 7: Hand it over
+Then check it:
 
-**Single:** give (1) the meme — shown inline if possible, otherwise the link — and which tool made it, (2) the two messages ready to paste, (3) one line on why this angle fits this person, (4) a spelling-check reminder if the image tool wrote the text, (5) the prompt used, so it can be re-run anywhere.
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/make-memes/scripts/check_dm.py --m1 "<message 1>" --m2 "<message 2>" --company "<prospect's company>" --client "<client name>"
+```
 
-**Batch:** give the output folder path, the `messages.csv`, a short summary (how many made, how many skipped and why, which pains were used), and anything that needs a human look.
+Rewrite until it prints PASS.
 
-Then, if the user is happy with a meme, offer once to add it to the client's meme bank in their brief file (scene, caption, which buyer type), so the next run can reuse what worked.
+## Step 7: Save and hand over
+
+Save to `meme-outreach-output/<client-slug>/<prospect-slug>/`: the meme image (`meme.png` or `.jpg`, or `meme-url.txt` when only a link exists), `dm.txt` (both messages), and `prompt.txt` (the image prompt).
+
+Then reply with:
+1. the meme (show the image if you can, otherwise the path or link) and which route made it
+2. the two messages, ready to paste
+3. one line on why this angle fits this prospect
+4. a spelling-check reminder if an image tool wrote the text
+
+**Batch:** the output folder, `messages.csv`, and a short summary (made, skipped and why, pains used, anything to check).
+
+If the user likes a meme, offer once to add it to the client's `meme-bank.md` so it can be reused.
 
 ## Ground rules
 
-- Two styles: an original real-life photo scene (grainy phone snapshot, ordinary people, everyday places), or a famous meme template from the web. No cartoons, 3D, illustrations or glossy AI style.
-- Famous templates: use the real template image, downloaded from the web. Never use AI to generate a celebrity, a lookalike, or a fake version of a famous meme. No brand logos added to the image. Platform or tool names as caption or label text are fine.
+- Every meme is an original, real-looking photo scene of people or animals (a grainy phone snapshot of an everyday moment). No cartoon, 3D, illustration, drawn or glossy AI look, ever.
+- No famous meme templates, celebrities, lookalikes or brand logos. Every scene is new, written from the client's insight map.
 - Joke about the situation, never about the prospect, their company or their work.
-- Never put a prospect's name or company in the image unless the user asks; keep the personal part in the DM.
-- Numbers in captions are part of the joke ("day 74", "40 accounts"), never presented as real results.
-- Prospect lists and briefs stay on the user's machine. Don't paste them into public places or third-party tools beyond the image prompt, and keep personal details out of image prompts.
+- Keep the prospect's name and company out of the image unless the user asks.
+- Numbers in captions are part of the joke ("day 74"), never presented as real results.
+- Never invent client facts or proof points. Prospect lists and briefs stay on the user's machine; keep personal details out of image prompts.
