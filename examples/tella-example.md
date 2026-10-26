@@ -1,6 +1,6 @@
 # Example: one follow-up, image made with Tella
 
-Everything here is made up. The client is the fictional **Northwind Bookkeeping** (brief: `plugins/meme-outreach/skills/make-memes/examples/northwind-bookkeeping.md`), and the prospect is a hypothetical restaurant owner.
+Everything here is made up. The client is the fictional **Northwind Bookkeeping** (client skill: [`northwind-memes/`](northwind-memes/)), and the prospect is a hypothetical restaurant owner.
 
 ## What the user typed
 
@@ -19,7 +19,7 @@ Sam (Oct 13): Following up on this, happy to share how other 3-location owners h
 ## What the skill did
 
 1. **Job:** client Northwind, single prospect, follow-up (two messages from Sam, no reply).
-2. **Brief:** found `northwind-bookkeeping.md`.
+2. **Client:** found the `northwind-memes` client skill (brief and meme map).
 3. **Meme fit:** no "no", not mid-conversation, no meme sent before. OK to send one.
 4. **Pain:** a third location means more books, and the brief's top pain is "I do the books on Sunday nights". It offered two concepts and recommended this one:
 
@@ -35,7 +35,7 @@ Caption: "Our 3 locations sending month-end numbers."
 Why it fits Maria: three locations, likely three ways of doing the numbers
 ```
 
-5. **Image:** Tella was connected, so it used Tella's `generate_image` (landscape). The image came back as a link, so the caption was written by Tella (Template B) and checked for spelling.
+5. **Image:** Tella was connected, so it used Tella's `generate_image` (landscape). The image came back as a link, so the caption was written by Tella (Prompt B) and checked for spelling.
 
 ![Me doing the books after a 14-hour Saturday.](meme-books-tella.jpg)
 
