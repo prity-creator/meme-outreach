@@ -1,4 +1,13 @@
+# Meme Outreach
 
+Turn quiet prospects into conversations with personalized memes.
+
+Paste a LinkedIn or email thread that went nowhere (or a list of 100 prospects), say whose prospects they are, and Claude Code makes:
+
+- **A meme** about a pain the prospect will recognize, in a real-life phone-photo style (no cartoons, no AI gloss).
+- **A two-line DM** to send with it: one line tying the meme to them, one casual question. No pitch.
+
+It works for any company or client, as long as there's a short client brief for it to read. If there isn't one, it asks you a few questions and saves the brief for next time.
 
 ## Example
 
@@ -12,16 +21,7 @@ A made-up restaurant owner who went quiet after two messages. The image was made
 >
 > Who ends up doing the books across all three, still you?
 
-Full walkthrough, from the pasted thread to the final DM: [examples/tella-example.md](examples/tella-example.md)# Meme Outreach
-
-Turn quiet prospects into conversations with personalized memes.
-
-Paste a LinkedIn or email thread that went nowhere (or a list of 100 prospects), say whose prospects they are, and Claude Code makes:
-
-- **A meme** about a pain the prospect will recognize, in a real-life phone-photo style (no cartoons, no AI gloss).
-- **A two-line DM** to send with it: one line tying the meme to them, one casual question. No pitch.
-
-It works for any company or client, as long as there's a short client brief for it to read. If there isn't one, it asks you a few questions and saves the brief for next time.
+Full walkthrough, from the pasted thread to the final DM: [examples/tella-example.md](examples/tella-example.md)
 
 ## Install (Claude Code)
 
