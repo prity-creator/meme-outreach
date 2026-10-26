@@ -46,7 +46,7 @@ Tell the user to check the spelling before sending.
 - Ordinary people: "an ordinary man in his 30s in a casual button-up shirt", "a tired woman in her 40s in a hoodie". Not models.
 - One clear action plus one clear emotion.
 - Two or three real props: coffee mugs, crumpled napkins, kids' toys, a phone on speaker.
-- Never a celebrity, lookalike, famous meme photo, or brand logo. Never a prospect's personal details.
+- Never ask an image model for a celebrity, a lookalike, a famous meme photo or a brand logo. (For famous templates, download the real template instead; see `meme-method.md`.) Never a prospect's personal details.
 
 ## Image routes
 
