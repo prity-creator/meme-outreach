@@ -13,7 +13,7 @@ It works for any company or client, as long as there's a short client brief for 
 
 A made-up restaurant owner who went quiet after two messages. The image was made with Tella:
 
-![Me doing the books after a 14-hour Saturday.](https://ucarecdn.com/e7b160ed-5cde-4761-8d92-089191e4fa9c/-/resize/1200x/-/format/jpeg/)
+![Me doing the books after a 14-hour Saturday.](examples/meme-books-tella.jpg)
 
 > Third location's been open a month now, so this one felt honestly a little too real 😅
 >
