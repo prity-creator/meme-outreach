@@ -1,4 +1,18 @@
-# Meme Outreach
+
+
+## Example
+
+A made-up restaurant owner who went quiet after two messages. The image was made with Tella:
+
+![Me doing the books after a 14-hour Saturday.](https://ucarecdn.com/e7b160ed-5cde-4761-8d92-089191e4fa9c/-/resize/1200x/-/format/jpeg/)
+
+> Third location's been open a month now, so this one felt honestly a little too real 😅
+>
+> [new message]
+>
+> Who ends up doing the books across all three, still you?
+
+Full walkthrough, from the pasted thread to the final DM: [examples/tella-example.md](examples/tella-example.md)# Meme Outreach
 
 Turn quiet prospects into conversations with personalized memes.
 
