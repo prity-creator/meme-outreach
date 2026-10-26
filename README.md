@@ -4,7 +4,7 @@ Turn quiet prospects into conversations with personalized memes.
 
 Paste a LinkedIn or email thread that went nowhere (or a list of 100 prospects), say whose prospects they are, and Claude Code makes:
 
-- **A meme** about a pain the prospect will recognize, in a real-life phone-photo style (no cartoons, no AI gloss).
+- **A meme** about a pain the prospect will recognize: a real-life phone-photo scene, or a famous meme template from the web (Drake, distracted boyfriend and so on).
 - **A two-line DM** to send with it: one line tying the meme to them, one casual question. No pitch.
 
 It works for any company or client, as long as there's a short client brief for it to read. If there isn't one, it asks you a few questions and saves the brief for next time.
@@ -79,7 +79,7 @@ Captions are added by a small Python script (`scripts/add_caption.py`, needs `pi
 
 ## Ground rules baked in
 
-- Original real-life scenes only. No celebrities, famous meme templates or brand logos.
+- Original real-life scenes or famous meme templates. Templates use the real image from the web with your text added; they're never AI-faked. Templates are other people's images, so using them in outreach is your call.
 - Jokes are about the situation, never about the prospect.
 - No meme for people who said no, are mid-conversation, or already got one.
 - Never invents client results, case studies or quotes. Proof points come only from your brief, and only after the prospect replies.
