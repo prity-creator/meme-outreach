@@ -1,7 +1,7 @@
 {
   "name": "meme-outreach",
   "displayName": "Meme Outreach",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Turn a prospect thread (or a list of 100 prospects) into personalized real-photo-style memes plus short, casual DMs, built from your client brief",
   "author": {
     "name": "prity-creator"
