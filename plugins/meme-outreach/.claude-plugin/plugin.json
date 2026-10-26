@@ -1,12 +1,18 @@
 {
   "name": "meme-outreach",
   "displayName": "Meme Outreach",
-  "version": "1.1.0",
-  "description": "Turn a prospect thread (or a list of 100 prospects) into personalized real-photo-style memes plus short, casual DMs, built from your client brief",
+  "version": "2.0.0",
+  "description": "Two-part meme outreach for Claude Code: set up a client (brief + pain-to-meme map), then turn prospect threads or lists into personalized memes plus short, casual DMs",
   "author": {
     "name": "prity-creator"
   },
   "repository": "https://github.com/prity-creator/meme-outreach",
   "license": "MIT",
-  "keywords": ["outreach", "linkedin", "memes", "sales", "follow-up"]
+  "keywords": [
+    "outreach",
+    "linkedin",
+    "memes",
+    "sales",
+    "follow-up"
+  ]
 }
