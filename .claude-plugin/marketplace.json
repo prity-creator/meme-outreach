@@ -8,7 +8,7 @@
     {
       "name": "meme-outreach",
       "source": "./plugins/meme-outreach",
-      "description": "Turn a prospect thread (or a list of 100 prospects) into personalized memes plus short, casual DMs, built from your client brief"
+      "description": "Set up a client once, then turn prospect threads or lists into personalized memes plus short, casual DMs"
     }
   ]
 }
