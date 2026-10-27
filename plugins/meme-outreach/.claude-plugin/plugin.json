@@ -1,8 +1,8 @@
 {
   "name": "meme-outreach",
   "displayName": "Meme Outreach",
-  "version": "2.0.0",
-  "description": "Two-part meme outreach for Claude Code: set up a client (brief + pain-to-meme map), then turn prospect threads or lists into personalized memes plus short, casual DMs",
+  "version": "2.1.0",
+  "description": "Two-part meme outreach for Claude Code: build the brief about your company (brief + pain-to-meme map), then turn prospect threads or lists into personalized memes plus short, casual DMs",
   "author": {
     "name": "prity-creator"
   },
