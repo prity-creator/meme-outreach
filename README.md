@@ -2,15 +2,15 @@
 
 Turn quiet prospects into conversations with personalized memes, in Claude Code.
 
-You give it a prospect thread (or a list of 100 prospects) and say whose prospects they are. It makes:
+You build a brief about your company once. After that, give it a prospect thread (or a list of 100 prospects) and it makes:
 
-- **A meme** about a pain the prospect will recognize: a brand-new, real-looking photo scene of people or animals, written from your client's insight map.
+- **A meme** about a pain the prospect will recognize: a brand-new, real-looking photo scene of people or animals, written from your company's insight map.
 - **A two-line DM** to send with it: one line tying the meme to them, one casual question. No pitch.
 
 It works in two parts:
 
-1. **Client setup** (once per client): builds the client's brief and a 20-row pain-to-meme map, and saves them as a client skill.
-2. **Make memes** (every time): reads that client skill and turns threads or lists into memes plus DMs.
+1. **Company setup** (once): builds the brief about your company first, plus a 20-row pain-to-meme map, and saves them as a company skill.
+2. **Make memes** (every time): reads that company skill and turns threads or lists into memes plus DMs.
 
 ## Install (one step)
 
@@ -22,46 +22,48 @@ Or inside Claude Code: `/plugin marketplace add prity-creator/meme-outreach`, th
 
 Captions are added by a small Python script, so you also need Pillow: `pip install pillow`.
 
-## Part 1: set up a client
+## Part 1: build the brief about your company first
 
 ```
-/meme-outreach:client-setup Acme
+/meme-outreach:company-setup Acme
 ```
 
-or just say "set up Acme for meme outreach". It first asks where the client information is:
+(using your own company's name), or just say "set up meme outreach for my company". It first asks where the information about your company is:
 
 1. **A folder** (docs, notes, briefs, call transcripts)
 2. **.md or text files**
-3. **A skill or plugin you already have** (for example a DM-reply skill with a client brief)
+3. **A skill or plugin you already have** (for example a DM-reply skill with your company brief)
 4. **Nowhere yet** (it asks you questions, and can read the website)
 
-Then it builds the brief (what the client does, services, who it caters to, locations, what a qualified lead is, outreach and voice, why people buy, pain points, real proof points, objections, next step, off-limits), asks only about what's missing, and builds the pain-to-meme map:
+Then it builds the brief (what your company does, services, who it sells to, locations, what a qualified lead is, outreach and voice, why people buy, pain points, real proof points, objections, next step, off-limits), asks only about what's missing, and builds the pain-to-meme map:
 
 > pain → consequence → situation → why it's funny → meme → caption → casual question
 
-It saves the result as a client skill in `~/.claude/skills/<client>-memes/` and as a `.zip` you can share with your team. See a complete made-up example in [`examples/northwind-memes/`](examples/northwind-memes/).
+It saves the result as a company skill in `~/.claude/skills/<company>-memes/` and as a `.zip` you can share with your team. See a complete made-up example in [`examples/northwind-memes/`](examples/northwind-memes/).
+
+Doing outreach for more than one company (for example, an agency running outreach for its clients)? Run setup once per company, then name the company when you make memes ("this is an Acme prospect").
 
 ## Part 2: make memes
 
 **One prospect**
 
 ```
-/meme-outreach:make-memes This is an Acme prospect, they went quiet after my second message.
+/meme-outreach:make-memes This prospect went quiet after my second message.
 <paste the thread>
 ```
 
 **A list**
 
 ```
-/meme-outreach:make-memes Make memes for this list of Acme prospects. It's a follow-up.
+/meme-outreach:make-memes Make memes for this list of prospects. It's a follow-up.
 <attach prospects.csv>
 ```
 
-You can also just ask in plain words; Claude picks the skill on its own. Batch runs group prospects by pain, show you the plan before making any images, and save `meme-outreach-output/<client>-<date>/` with the memes and `messages.csv` (each prospect's meme file and two messages), ready for any sending tool. Input columns: [`prospects_template.csv`](plugins/meme-outreach/skills/make-memes/templates/prospects_template.csv).
+You can also just ask in plain words; Claude picks the skill on its own. Batch runs group prospects by pain, show you the plan before making any images, and save `meme-outreach-output/<company>-<date>/` with the memes and `messages.csv` (each prospect's meme file and two messages), ready for any sending tool. Input columns: [`prospects_template.csv`](plugins/meme-outreach/skills/make-memes/templates/prospects_template.csv).
 
 ## Example
 
-A made-up restaurant owner (a prospect of the made-up Northwind Bookkeeping) who went quiet after two messages. The image was made with Tella:
+A made-up restaurant owner (a prospect of the made-up bookkeeping firm Northwind Bookkeeping) who went quiet after two messages. The image was made with Tella:
 
 ![Me doing the books after a 14-hour Saturday.](examples/meme-books-tella.jpg)
 
@@ -75,7 +77,7 @@ Full walkthrough: [examples/tella-example.md](examples/tella-example.md)
 
 ## Where the images come from
 
-Claude writes every meme as a fresh image prompt, built from the client's pain-to-meme map and the prospect's own words. An image generator renders it, using the first one that works:
+Claude writes every meme as a fresh image prompt, built from your company's pain-to-meme map and the prospect's own words. An image generator renders it, using the first one that works:
 
 1. **Tella** (if the Tella connector is available in Claude Code)
 2. **Gamma** (if the Gamma connector is available)
@@ -89,7 +91,7 @@ Claude itself can't render photos. If no generator is available or credits run o
 - Jokes are about the situation, never about the prospect.
 - No meme for people who said no, are mid-conversation, or already got one.
 - Every DM is checked by a script: two short messages, no pitch, no links, no jargon.
-- Never invents client facts, results or quotes. Your client briefs stay on your machine; nothing about your clients is in this repo.
+- Never invents company facts, results or quotes. Your company brief stays on your machine; nothing about your company is in this repo.
 
 ## License
 
