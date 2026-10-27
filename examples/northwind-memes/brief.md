@@ -1,6 +1,6 @@
-# Northwind Bookkeeping — Client Brief
+# Northwind Bookkeeping — Company Brief
 
-> Made-up example client.
+> Made-up example company.
 
 ## 1. What they do
 Monthly bookkeeping and payroll for independent restaurants, so owners get clean books and on-time payroll without hiring an in-house accountant.

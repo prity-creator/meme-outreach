@@ -1,6 +1,6 @@
 # Northwind Bookkeeping — Pain-to-Meme Map
 
-> Made-up example client.
+> Made-up example company.
 
 Each row walks one pain until it turns funny: pain → consequence → situation → why it's funny → meme → caption → casual question. ★ marks the rows that work best for prospects who went quiet.
 
