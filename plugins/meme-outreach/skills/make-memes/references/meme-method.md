@@ -28,10 +28,10 @@ Why it fits <first name>: <one line tying it to something true about them>
 ## Does it land? (check every concept before building)
 
 - **Specific:** would this prospect think "that's literally us"? If it could go to anyone in any industry, it's too generic.
-- **True:** the pain comes from their words, a real signal, or the client's brief. Not a guess.
+- **True:** the pain comes from their words, a real signal, or the company brief. Not a guess.
 - **One second:** the joke reads instantly on a phone screen. If it needs explaining, simplify.
 - **Kind:** it laughs at the situation, never at them, their company or their work.
-- **Not about us:** the meme shows the buyer's problem, never the client's solution. No product, no logo, no "we can help", no panel or sign that describes what the client sells. The meme earns the reply; the pitch comes later.
+- **Not about us:** the meme shows the buyer's problem, never your company's solution. No product, no logo, no "we can help", no panel or sign that describes what you sell. The meme earns the reply; the pitch comes later.
 - **Not about the silence:** no "when they don't reply to my DM" jokes. Those get ignored.
 
 ## Good vs. bad
@@ -41,7 +41,7 @@ Why it fits <first name>: <one line tying it to something true about them>
 | A man holding a "please reply" sign at a window | A faded "NOW HIRING" sign in a shop window with a cobweb and a bored shopkeeper: "Our senior PPC role, month four." — for an agency with an open PPC role |
 | "Marketing be like..." with a random stock photo | Sweating man pulling one block from a wobbly Jenga tower: "Increasing daily budget by 10%." — for a brand that said scaling scares them |
 | A joke about their logo, website or results | A tired chef doing the books at a closed bar at night: "Me doing the books after a 14-hour Saturday." — for a restaurant owner who just opened a third location |
-| A meme that explains the client's service | Three friends pointing at the last pizza slice labeled "Google Ads", "GA4", "CRM": "...when one customer buys." — for someone who complained about attribution |
+| A meme that explains your service | Three friends pointing at the last pizza slice labeled "Google Ads", "GA4", "CRM": "...when one customer buys." — for someone who complained about attribution |
 
 ## Real-life photo scenes
 

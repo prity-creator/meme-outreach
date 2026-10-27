@@ -17,7 +17,7 @@ A CSV (see `${CLAUDE_PLUGIN_ROOT}/skills/make-memes/templates/prospects_template
 
 ## Before generating anything, confirm
 
-1. **Client** and its brief (Step 2 in SKILL.md).
+1. **Company** and its brief (Step 2 in SKILL.md).
 2. **Message type:** first message or follow-up, for the whole list or per row.
 3. **Image budget:** which route is available and roughly what the batch will cost or use up (for example "100 prospects in 8 pain groups = 8 photos").
 
@@ -53,14 +53,14 @@ work/group2.png,out/images/group2.png,"Google Ads, GA4 and the CRM when one cust
 
 ## Writing the DMs
 
-Every prospect gets their own two messages, following `dm-rules.md`. When the CSV is written, check every row with `python3 ${CLAUDE_PLUGIN_ROOT}/skills/make-memes/scripts/check_dm.py --csv messages.csv --client "<client name>"` and rewrite any row that fails. Message 1 must use something specific to them (their words, their company, a real signal from the row or quick research); never send the same message 1 to two people. The question can repeat across a group if it fits each person.
+Every prospect gets their own two messages, following `dm-rules.md`. When the CSV is written, check every row with `python3 ${CLAUDE_PLUGIN_ROOT}/skills/make-memes/scripts/check_dm.py --csv messages.csv --our-company "<your company name>"` and rewrite any row that fails. Message 1 must use something specific to them (their words, their company, a real signal from the row or quick research); never send the same message 1 to two people. The question can repeat across a group if it fits each person.
 
 ## Output
 
 Create a folder in the current directory:
 
 ```
-meme-outreach-output/<client-slug>-<YYYY-MM-DD>/
+meme-outreach-output/<company-slug>-<YYYY-MM-DD>/
 ├── images/            one finished meme per group (or per prospect when personalized)
 ├── messages.csv       one row per prospect
 └── skipped.csv        prospects not messaged, with the reason
