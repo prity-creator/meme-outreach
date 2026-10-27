@@ -1,11 +1,11 @@
 # Example: one follow-up, image made with Tella
 
-Everything here is made up. The client is the fictional **Northwind Bookkeeping** (client skill: [`northwind-memes/`](northwind-memes/)), and the prospect is a hypothetical restaurant owner.
+Everything here is made up. The company doing the outreach is the fictional **Northwind Bookkeeping** (its company skill: [`northwind-memes/`](northwind-memes/)), and the prospect is a hypothetical restaurant owner.
 
 ## What the user typed
 
 ```
-This is a Northwind prospect, she went quiet. Make a meme follow-up.
+She went quiet. Make a meme follow-up.
 
 Prospect: Maria Lopez, owner of Casa Verde Taqueria (3 locations)
 
@@ -18,8 +18,8 @@ Sam (Oct 13): Following up on this, happy to share how other 3-location owners h
 
 ## What the skill did
 
-1. **Job:** client Northwind, single prospect, follow-up (two messages from Sam, no reply).
-2. **Client:** found the `northwind-memes` client skill (brief and meme map).
+1. **Job:** company Northwind (the only one set up), single prospect, follow-up (two messages from Sam, no reply).
+2. **Company brief:** found the `northwind-memes` company skill (brief and meme map).
 3. **Meme fit:** no "no", not mid-conversation, no meme sent before. OK to send one.
 4. **Pain:** a third location means more books, and the brief's top pain is "I do the books on Sunday nights". It offered two concepts and recommended this one:
 
