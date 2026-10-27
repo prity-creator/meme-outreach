@@ -2,9 +2,9 @@
 """Check a meme DM against the rules before handing it over.
 
 Usage:
-  python3 check_dm.py --m1 "tie-in line" --m2 "casual question" [--company "Acme"] [--client "OurCo"]
+  python3 check_dm.py --m1 "tie-in line" --m2 "casual question" [--prospect-company "Acme"] [--our-company "YourCo"]
   python3 check_dm.py --question "casual question"          (check just a question)
-  python3 check_dm.py --csv messages.csv                    (check message_1/message_2 columns; uses 'company' column)
+  python3 check_dm.py --csv messages.csv                    (checks message_1/message_2; uses the 'company' column) [--our-company "YourCo"]
 
 Prints PASS, or every rule that failed. Exit code 1 if anything failed.
 """
@@ -52,7 +52,7 @@ def check_question(q, company=None):
     return errs
 
 
-def check_dm(m1, m2, company=None, client=None):
+def check_dm(m1, m2, company=None, our_company=None):
     errs = []
     if not m1.strip() or not m2.strip():
         errs.append("needs exactly two messages: a tie-in line and a casual question")
@@ -68,7 +68,7 @@ def check_dm(m1, m2, company=None, client=None):
     for p in GUILT:
         if re.search(p, m1, re.I):
             errs.append("message 1 guilt-trips about the silence; keep it light")
-    if client and client.strip() and re.search(re.escape(client.strip()), m1 + " " + m2, re.I):
+    if our_company and our_company.strip() and re.search(re.escape(our_company.strip()), m1 + " " + m2, re.I):
         errs.append("don't name our own company in the meme DM")
     errs += check_question(m2, company)
     return errs
@@ -79,8 +79,8 @@ def main():
     ap.add_argument("--m1")
     ap.add_argument("--m2")
     ap.add_argument("--question")
-    ap.add_argument("--company")
-    ap.add_argument("--client")
+    ap.add_argument("--prospect-company", "--company", dest="company", help="the prospect's company")
+    ap.add_argument("--our-company", "--client", dest="our_company", help="your own company (must not appear in the DM)")
     ap.add_argument("--csv")
     a = ap.parse_args()
 
@@ -88,7 +88,7 @@ def main():
     if a.csv:
         with open(a.csv, newline="", encoding="utf-8-sig") as fh:
             for i, row in enumerate(csv.DictReader(fh), start=2):
-                errs = check_dm(row.get("message_1", ""), row.get("message_2", ""), row.get("company"), a.client)
+                errs = check_dm(row.get("message_1", ""), row.get("message_2", ""), row.get("company"), a.our_company)
                 if errs:
                     failed = True
                     print(f"row {i} ({row.get('name', '?')}):")
@@ -100,7 +100,7 @@ def main():
         for e in errs:
             print(f"- {e}")
     elif a.m1 is not None and a.m2 is not None:
-        errs = check_dm(a.m1, a.m2, a.company, a.client)
+        errs = check_dm(a.m1, a.m2, a.company, a.our_company)
         failed = bool(errs)
         for e in errs:
             print(f"- {e}")
